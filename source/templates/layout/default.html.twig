@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/style.css" rel="stylesheet">
+        {% block javascripts %}
+            {{ importmap('app') }}
+        {% endblock %}
+    {% endblock %}
+</head>
+<body>
+<div class="">
+    <ul class="flex">
+        <li class="mr-6">
+            <a class="text-blue-500 hover:text-blue-800" href="/">Homepage</a>
+        </li>
+        <li class="mr-6">
+            <a class="text-blue-500 hover:text-blue-800" href="#">Category 1</a>
+        </li>
+        <li class="mr-6">
+            <a class="text-blue-500 hover:text-blue-800" href="#">Category 2</a>
+        </li>
+    </ul>
+</div>
+
+<div class="m-auto max-w-6xl">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>

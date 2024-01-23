@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "@hotwired/stimulus": "^3.0.0",
+    "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets",
+    "tailwindcss": "^3.4.1"
+  },
+  "scripts": {
+    "dev": "tailwindcss -i ./resources/tailwind/style.css -o ./public/style.css --watch",
+    "build": "webpack build"
+  }
+}
