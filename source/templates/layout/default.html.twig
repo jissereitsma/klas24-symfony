@@ -14,14 +14,13 @@
 <div class="">
     <ul class="flex">
         <li class="mr-6">
-            <a class="text-blue-500 hover:text-blue-800" href="/">Homepage</a>
+            <a class="text-blue-500 hover:text-blue-800" href="/">Home</a>
         </li>
+        {% for category in categories %}
         <li class="mr-6">
-            <a class="text-blue-500 hover:text-blue-800" href="#">Category 1</a>
+            <a class="text-blue-500 hover:text-blue-800" href="/category/{{ category.id }}">{{ category.title }}</a>
         </li>
-        <li class="mr-6">
-            <a class="text-blue-500 hover:text-blue-800" href="#">Category 2</a>
-        </li>
+        {% endfor %}
     </ul>
 </div>
 

@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class ProductController extends AbstractController
+class CategoryController extends AbstractController
 {
     public function __construct(
         private ProductRepository $productRepository,
@@ -17,17 +17,22 @@ class ProductController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/product/{id}')]
+    #[Route(path: '/category/{id}')]
     public function __invoke(Request $request): Response
     {
-        $productId = (int)$request->get('id');
-        $product = $this->productRepository->find($productId);
+        $categoryId = (int)$request->get('id');
+        $category = $this->categoryRepository->find($categoryId);
+
+        $products = $this->productRepository->findBy([
+            'category' => $category
+        ]);
 
         $categories = $this->categoryRepository->findAll();
 
-        return $this->render('product.html.twig', [
-            'product' => $product,
+        return $this->render('category.html.twig', [
+            'category' => $category,
             'categories' => $categories,
+            'products' => $products,
         ]);
     }
 }

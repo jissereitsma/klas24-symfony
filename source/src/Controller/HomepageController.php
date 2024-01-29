@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use App\Product\ProductLoader;
+use App\Repository\CategoryRepository;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -10,14 +11,21 @@ use Symfony\Component\Routing\Attribute\Route;
 class HomepageController extends AbstractController
 {
     public function __construct(
-        private ProductLoader $productLoader
+        private ProductRepository $productRepository,
+        private CategoryRepository $categoryRepository,
+
     ) {
     }
 
     #[Route(path: '/')]
     public function homepage(): Response
     {
-        $products = $this->productLoader->getProducts();
-        return $this->render('homepage.html.twig', ['products' => $products]);
+        $products = $this->productRepository->findAll();
+        $categories = $this->categoryRepository->findAll();
+
+        return $this->render('homepage.html.twig', [
+            'products' => $products,
+            'categories' => $categories,
+        ]);
     }
 }

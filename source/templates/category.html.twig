@@ -2,8 +2,7 @@
 
 {% block content %}
     <div class="">
-        <h1 class="text-3xl font-bold">Welcome to our shop</h1>
-        {{ component('randomNumber') }}
+        <h1 class="text-3xl font-bold">{{ category.title }}</h1>
     </div>
     <ul class="grid grid-cols-4 gap-4">
         {% for product in products %}
