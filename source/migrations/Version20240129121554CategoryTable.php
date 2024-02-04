@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240129121554 extends AbstractMigration
+final class Version20240129121554CategoryTable extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -22,6 +22,7 @@ final class Version20240129121554 extends AbstractMigration
         $sql = <<<SQLCODE
 CREATE TABLE category (
    id INT AUTO_INCREMENT NOT NULL, 
+   parent_id INT DEFAULT 0 NOT NULL,
    title VARCHAR(255) NOT NULL, 
    PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
 SQLCODE;

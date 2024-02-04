@@ -1,0 +1,17 @@
+{% extends 'layout/default.html.twig' %}
+
+{% block content %}
+    <div class="">
+        <h1 class="text-3xl font-bold">Search results: "{{ search }}"</h1>
+    </div>
+    <ul class="grid grid-cols-4 gap-4">
+        {% for product in products %}
+            <li>
+                <a href="/product/{{ product.id }}">
+                    <h3>{{ product.title }}</h3>
+                    <img src="{{ product.image }}">
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

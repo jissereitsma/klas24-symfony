@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\CategoryRepository;
+use App\PageLoader\GenericPageLoader;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +13,7 @@ class ProductController extends AbstractController
 {
     public function __construct(
         private ProductRepository $productRepository,
-        private CategoryRepository $categoryRepository,
+        private GenericPageLoader $genericPageLoader
     ) {
     }
 
@@ -22,12 +22,12 @@ class ProductController extends AbstractController
     {
         $productId = (int)$request->get('id');
         $product = $this->productRepository->find($productId);
+        if (!$product) {
+            return $this->render('page/notfound.html.twig', $this->genericPageLoader->mergeParameters([]));
+        }
 
-        $categories = $this->categoryRepository->findAll();
-
-        return $this->render('product.html.twig', [
+        return $this->render('page/product.html.twig', $this->genericPageLoader->mergeParameters([
             'product' => $product,
-            'categories' => $categories,
-        ]);
+        ]));
     }
 }

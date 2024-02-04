@@ -11,17 +11,24 @@
     {% endblock %}
 </head>
 <body>
-<div class="">
+<div class="container">
     <ul class="flex">
         <li class="mr-6">
             <a class="text-blue-500 hover:text-blue-800" href="/">Home</a>
         </li>
         {% for category in categories %}
-        <li class="mr-6">
-            <a class="text-blue-500 hover:text-blue-800" href="/category/{{ category.id }}">{{ category.title }}</a>
-        </li>
+            <li class="mr-6">
+                <a class="text-blue-500 hover:text-blue-800" href="/category/{{ category.id }}">{{ category.title }}</a>
+            </li>
         {% endfor %}
     </ul>
+
+    <div class="search">
+        <form method="get" action="/search">
+            <input onChange="form.submit()" type="text" name="search" id="search" value="{{ search }}"
+                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+        </form>
+    </div>
 </div>
 
 <div class="m-auto max-w-6xl">
