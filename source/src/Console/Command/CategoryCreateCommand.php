@@ -30,6 +30,9 @@ class CategoryCreateCommand extends Command
     {
         $name = trim((string)$input->getOption('name'));
         $parentId = (int)$input->getOption('parent_id');
+        if ($parentId < 1) {
+            throw new \RuntimeException('Parent ID should be higher than 0');
+        }
 
         $category = new Category();
         $category->setTitle($name);

@@ -21,8 +21,10 @@ class HomepageController extends AbstractController
     {
         $products = $this->productRepository->findAll();
 
-        return $this->render('page/homepage.html.twig', $this->genericPageLoader->mergeParameters([
+        $parameters = $this->genericPageLoader->mergeParameters([
             'products' => $products,
-        ]));
+        ]);
+
+        return $this->render('page/homepage.html.twig', $parameters);
     }
 }

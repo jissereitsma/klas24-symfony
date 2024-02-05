@@ -23,7 +23,7 @@ class GenericPageLoader
     private function getSearch(): string
     {
         $request = Request::createFromGlobals();
-        $search = (string)$request->query->get('search');
+        $search = $request->query->get('search', (string)true);
         return $search;
     }
 

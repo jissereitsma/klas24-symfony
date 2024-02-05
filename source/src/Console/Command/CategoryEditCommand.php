@@ -35,7 +35,10 @@ class CategoryEditCommand extends Command
         $category = $this->categoryRepository->find($categoryId);
 
         $name = trim((string)$input->getOption('name'));
-        $parentId = $input->getOption('parent_id');
+        $parentId = (int)$input->getOption('parent_id');
+        if($parentId < 1) {
+            throw new \RuntimeException('Parent ID should be higher than 0');
+        }
 
         if (!empty($name)) {
             $category->setTitle($name);
