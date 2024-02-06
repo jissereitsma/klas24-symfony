@@ -5,7 +5,7 @@ namespace App\PageLoader;
 use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 
-class GenericPageLoader
+class GenericPageLoader implements GenericPageLoaderInterface
 {
     public function __construct(
         private CategoryRepository $categoryRepository,
