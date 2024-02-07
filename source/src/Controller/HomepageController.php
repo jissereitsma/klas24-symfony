@@ -2,30 +2,36 @@
 
 namespace App\Controller;
 
-use App\Repository\CategoryRepository;
+use App\PageLoader\GenericPageLoader;
 use App\Repository\ProductRepository;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class HomepageController extends AbstractController
 {
     public function __construct(
         private ProductRepository $productRepository,
-        private CategoryRepository $categoryRepository,
-
+        private GenericPageLoader $genericPageLoader,
+        #[Autowire(service: 'monolog.logger.custom')] private LoggerInterface $customLogger
     ) {
     }
 
-    #[Route(path: '/')]
+    #[Route(path: '/', methods: ['GET'])]
     public function homepage(): Response
     {
         $products = $this->productRepository->findAll();
-        $categories = $this->categoryRepository->findAll();
 
-        return $this->render('homepage.html.twig', [
+        $parameters = $this->genericPageLoader->mergeParameters([
             'products' => $products,
-            'categories' => $categories,
         ]);
+
+        $this->customLogger->warning('Homeoage');
+
+        return $this->render('page/homepage.html.twig', $parameters);
     }
 }

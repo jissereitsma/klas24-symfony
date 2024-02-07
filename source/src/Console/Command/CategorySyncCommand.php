@@ -8,8 +8,8 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-#[AsCommand(name: 'category:download')]
-class CategoryDownloaderCommand extends Command
+#[AsCommand(name: 'category:sync')]
+class CategorySyncCommand extends Command
 {
     public function __construct(
         private CategoryDownloader $categoryDownloader,

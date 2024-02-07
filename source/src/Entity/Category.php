@@ -16,6 +16,9 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    #[ORM\Column]
+    private int $parentId = 0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -31,5 +34,15 @@ class Category
         $this->title = $title;
 
         return $this;
+    }
+
+    public function getParentId(): int
+    {
+        return $this->parentId;
+    }
+
+    public function setParentId(int $parentId): void
+    {
+        $this->parentId = $parentId;
     }
 }

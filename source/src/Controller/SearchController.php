@@ -4,12 +4,13 @@ namespace App\Controller;
 
 use App\PageLoader\GenericPageLoader;
 use App\Repository\ProductRepository;
+use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class ProductController extends AbstractController
+class SearchController extends AbstractController
 {
     public function __construct(
         private ProductRepository $productRepository,
@@ -17,17 +18,14 @@ class ProductController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/product/{id}')]
+    #[Route(path: '/search')]
     public function __invoke(Request $request): Response
     {
-        $productId = (int)$request->get('id');
-        $product = $this->productRepository->find($productId);
-        if (!$product) {
-            return $this->render('page/notfound.html.twig', $this->genericPageLoader->mergeParameters([]));
-        }
+        $search = trim((string)$request->query->get('search'));
+        $products = $this->productRepository->findBySearch($search);
 
-        return $this->render('page/product.html.twig', $this->genericPageLoader->mergeParameters([
-            'product' => $product,
+        return $this->render('page/search.html.twig', $this->genericPageLoader->mergeParameters([
+            'products' => $products,
         ]));
     }
 }
