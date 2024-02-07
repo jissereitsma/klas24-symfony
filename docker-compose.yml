@@ -8,6 +8,7 @@ services:
       - mysql
     volumes:
       - ./source/:/var/www/html
+      - ./xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
   mysql:
     image: mysql:8.0
     ports:

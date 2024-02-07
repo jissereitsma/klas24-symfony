@@ -53,6 +53,8 @@ RUN docker-php-ext-install -j$(nproc) gd
 RUN docker-php-ext-install bcmath
 RUN docker-php-ext-install sodium
 
+RUN pecl install xdebug && docker-php-ext-enable xdebug
+
 RUN a2enmod rewrite
 
 ADD ./apache.conf /etc/apache2/sites-available/000-default.conf
