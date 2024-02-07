@@ -23,7 +23,7 @@ final class Version20240129115455ProductTable extends AbstractMigration
         id INT AUTO_INCREMENT NOT NULL, 
         title VARCHAR(255) NOT NULL, 
         price DOUBLE PRECISION NOT NULL, 
-        description VARCHAR(255) DEFAULT NULL, 
+        description TEXT DEFAULT NULL, 
         category_id INT(11) NOT NULL, 
         image VARCHAR(255) NOT NULL, 
         PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');

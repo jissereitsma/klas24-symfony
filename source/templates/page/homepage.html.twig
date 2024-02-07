@@ -10,7 +10,7 @@
             <li>
                 <a href="/product/{{ product.id }}">
                     <h3>{{ product.title }}</h3>
-                    <img src="{{ product.image }}">
+                    <img src="{{ product.image }}" loading="lazy">
                 </a>
             </li>
         {% endfor %}

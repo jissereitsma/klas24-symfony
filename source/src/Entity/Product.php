@@ -81,7 +81,12 @@ class Product
 
     public function getImage(): ?string
     {
-        return $this->image;
+        $image = $this->image;
+        if (!preg_match('#^/#', $image) && !preg_match('#^(http|https)://#', $image)) {
+            $image = '/images/'.$image;
+        }
+
+        return $image;
     }
 
     public function setImage(string $image): static

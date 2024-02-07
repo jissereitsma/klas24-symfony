@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\PageLoader\GenericPageLoader;
+use App\PageLoader\GenericPageLoaderInterface;
 use App\Repository\ProductRepository;
 use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -14,7 +16,7 @@ class SearchController extends AbstractController
 {
     public function __construct(
         private ProductRepository $productRepository,
-        private GenericPageLoader $genericPageLoader
+        #[Autowire(service: GenericPageLoader::class)] private GenericPageLoaderInterface $genericPageLoader
     ) {
     }
 

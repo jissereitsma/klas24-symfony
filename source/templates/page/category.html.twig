@@ -5,14 +5,21 @@
         <h1 class="text-3xl font-bold">{{ category.title }}</h1>
         DEBUG: {{ foo }}
     </div>
+    <hr/>
+
+    {% include 'utils/pagination.html.twig' with {'pagination': pagination} %}
+
     <ul class="grid grid-cols-4 gap-4">
         {% for product in products %}
             <li>
                 <a href="/product/{{ product.id }}">
                     <h3>{{ product.title }}</h3>
-                    <img src="{{ product.image }}">
+                    <img src="{{ product.image }}" loading="lazy">
                 </a>
             </li>
         {% endfor %}
     </ul>
+
+    {% include 'utils/pagination.html.twig' with {'pagination': pagination} %}
+
 {% endblock %}

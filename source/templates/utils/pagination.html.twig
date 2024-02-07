@@ -1,0 +1,57 @@
+Total pages: {{ pagination.totalPages }}<br/>
+Total items: {{ pagination.totalItems }}<br/>
+Items per page: {{ pagination.itemsPerPage }}<br/>
+Current page: {{ pagination.currentPage }}<br/>
+
+<nav aria-label="Page navigation" class="my-8">
+    <ul class="list-style-none flex">
+        {% if pagination.currentPage > 1 %}
+            <li>
+                <a
+                        class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                        href="?page=1"
+                >First</a
+                >
+            </li>
+        {% endif %}
+
+        {% if pagination.currentPage > 1 %}
+            <li>
+                <a
+                        class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                        href="?page={{ pagination.currentPage - 1 }}"
+                >Previous</a
+                >
+            </li>
+        {% endif %}
+
+        {% for pageNumber in pagination.currentPages %}
+            <li {% if pageNumber == pagination.currentPage %}aria-current="page"{% endif %}>
+                <a
+                        class="relative block rounded bg-transparent px-3 py-1.5 text-sm transition-all duration-300
+                    {% if pageNumber == pagination.currentPage %} text-neutral-800 bg-amber-300{% else %} text-neutral-600{% endif %}
+                    hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                        href="?page={{ pageNumber }}"
+                >{{ pageNumber }}</a
+                >
+            </li>
+        {% endfor %}
+
+        {% if pagination.currentPage < pagination.totalPages %}
+            <li>
+                <a
+                        class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                        href="?page={{ pagination.currentPage + 1 }}"
+                >Next</a
+                >
+            </li>
+            <li>
+                <a
+                        class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                        href="?page={{ pagination.totalPages }}"
+                >Last</a
+                >
+            </li>
+        {% endif %}
+    </ul>
+</nav>

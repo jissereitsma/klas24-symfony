@@ -20,6 +20,6 @@ class ExampleListener
         $controller = $event->getControllerReflector();
         $controllerName = $controller->getName();
 
-        $this->logger->warning('onKernelController: ' . $request->getRequestUri(). ' = '.$controllerName);
+        $this->logger->notice('onKernelController: ' . $request->getRequestUri(). ' = '.$controllerName);
     }
 }

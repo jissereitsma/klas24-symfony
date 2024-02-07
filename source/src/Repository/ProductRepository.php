@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,6 +21,21 @@ class ProductRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Product::class);
+    }
+
+    public function getCategoryPaginator(Category $category, $page = 1, $postsPerPage = 16): Paginator
+    {
+        $query = $this->createQueryBuilder('p')
+            ->andWhere('p.category = :category')
+            ->setParameter('category', $category)
+            ->getQuery();
+
+        $paginator = new Paginator($query);
+        $paginator->getQuery()
+            ->setFirstResult($postsPerPage * ($page - 1))
+            ->setMaxResults($postsPerPage);
+
+        return $paginator;
     }
 
     /**

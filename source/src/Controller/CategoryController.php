@@ -6,6 +6,7 @@ use App\PageLoader\GenericPageLoader;
 use App\PageLoader\GenericPageLoaderInterface;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
+use App\Util\Pagination;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,12 +35,15 @@ class CategoryController extends AbstractController
             ]));
         }
 
-        $products = $this->productRepository->findBy([
-            'category' => $category
-        ]);
+        $currentPage = (int)$request->get('page', 1);
+        $itemsPerPage = 16;
+        $paginator = $this->productRepository->getCategoryPaginator($category, $currentPage, $itemsPerPage);
+        $pagination = new Pagination($paginator, $currentPage, $itemsPerPage);
+        $products = $paginator->getIterator();
 
         return $this->render('page/category.html.twig', $this->genericPageLoader->mergeParameters([
             'category' => $category,
+            'pagination' => $pagination,
             'products' => $products,
         ]));
     }
