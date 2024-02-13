@@ -54,6 +54,7 @@ RUN docker-php-ext-install bcmath
 RUN docker-php-ext-install sodium
 RUN docker-php-ext-install exif
 RUN pecl install xdebug && docker-php-ext-enable xdebug
+RUN pecl install redis && docker-php-ext-enable redis
 
 RUN a2enmod rewrite
 
