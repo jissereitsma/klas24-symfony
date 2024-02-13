@@ -23,11 +23,19 @@ class SearchController extends AbstractController
     #[Route(path: '/search')]
     public function __invoke(Request $request): Response
     {
-        $search = trim((string)$request->query->get('search'));
+        $search = $this->filterSearch((string)$request->query->get('search'));
         $products = $this->productRepository->findBySearch($search);
 
         return $this->render('page/search.html.twig', $this->genericPageLoader->mergeParameters([
             'products' => $products,
         ]));
+    }
+
+    private function filterSearch(string $search): string
+    {
+        $search = trim($search);
+        $search = strip_tags($search);
+
+        return $search;
     }
 }

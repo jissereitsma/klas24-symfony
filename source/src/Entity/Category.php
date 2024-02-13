@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -18,6 +20,14 @@ class Category
 
     #[ORM\Column]
     private int $parentId = 0;
+
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Product::class)]
+    private Collection $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -44,5 +54,10 @@ class Category
     public function setParentId(int $parentId): void
     {
         $this->parentId = $parentId;
+    }
+
+    public function getProducts(): Collection
+    {
+        return $this->products;
     }
 }

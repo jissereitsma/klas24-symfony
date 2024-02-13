@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\PageLoader\GenericPageLoader;
 use App\PageLoader\GenericPageLoaderInterface;
 use App\Repository\CategoryRepository;
@@ -24,8 +25,14 @@ class CategoryController extends AbstractController
     }
 
     #[Route(name: 'category', path: '/category/{id}', methods: ['GET', 'HEAD'])]
-    public function __invoke(Request $request): Response
+    public function __invoke(?Category $category = null, Request $request): Response
     {
+        if ($category=== null) {
+            return $this->render('page/notfound.html.twig', $this->genericPageLoader->mergeParameters([
+                ]));
+        }
+
+        /*
         $categoryId = (int)$request->get('id');
 
         try {
@@ -34,6 +41,7 @@ class CategoryController extends AbstractController
             return $this->render('page/notfound.html.twig', $this->genericPageLoader->mergeParameters([
             ]));
         }
+        */
 
         $currentPage = (int)$request->get('page', 1);
         $itemsPerPage = 16;

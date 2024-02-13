@@ -23,6 +23,14 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    public function countAll(): int
+    {
+        return (int)$this->createQueryBuilder('p')
+            ->select('count(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     public function getCategoryPaginator(Category $category, $page = 1, $postsPerPage = 16): Paginator
     {
         $query = $this->createQueryBuilder('p')
@@ -48,6 +56,16 @@ class ProductRepository extends ServiceEntityRepository
             ->setParameter('val', '%'.$search.'%')
             ->orderBy('p.id', 'ASC')
             ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    public function randomProducts(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('RAND()')
+            ->setMaxResults(100)
             ->getQuery()
             ->getResult();
     }

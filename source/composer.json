@@ -13,6 +13,7 @@
         "doctrine/orm": "^2.17",
         "fakerphp/faker": "^1.23",
         "joshtronic/php-loremipsum": "^2.1",
+        "predis/predis": "^2.2",
         "standaniels/image-generator": "^1.1",
         "symfony/asset": "7.0.*",
         "symfony/asset-mapper": "7.0.*",

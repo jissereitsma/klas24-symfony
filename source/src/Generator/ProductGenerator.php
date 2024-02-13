@@ -27,7 +27,7 @@ class ProductGenerator
         $this->loremIpsum = new LoremIpsum();
     }
 
-    public function generate()
+    public function generate(bool $flush = true)
     {
         $product = new Product();
         $product->setTitle($this->randomWords(rand(4, 7)));
@@ -37,6 +37,14 @@ class ProductGenerator
         $product->setCategory($this->randomCategory());
 
         $this->entityManager->persist($product);
+
+        if ($flush) {
+            $this->flush();
+        }
+    }
+
+    public function flush()
+    {
         $this->entityManager->flush();
     }
 
@@ -80,7 +88,7 @@ class ProductGenerator
     private function randomCategory(): Category
     {
         static $categories = null;
-        if (empty($categories)) {
+        if (is_null($categories)) {
             $categories = $this->categoryRepository->findAll();
         }
 

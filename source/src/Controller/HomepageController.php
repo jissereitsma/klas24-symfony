@@ -27,9 +27,15 @@ class HomepageController extends AbstractController
     #[Route(path: '/', methods: ['GET'])]
     public function homepage(): Response
     {
+        /*
         $criteria = new Criteria();
-        $criteria->setMaxResults(8);
+        $criteria->setMaxResults(100);
         $products = $this->productRepository->matching($criteria);
+        */
+
+        //$products = $this->productRepository->findBy([], [], 100);
+
+        $products = $this->productRepository->randomProducts();
 
         $parameters = $this->genericPageLoader->mergeParameters([
             'products' => $products,

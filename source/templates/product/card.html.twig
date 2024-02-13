@@ -1,0 +1,6 @@
+{% block product_card %}
+<a href="/product/{{ product.id }}">
+    <h3>{{ product.title }}</h3>
+    <img src="{{ product.image }}" loading="lazy">
+</a>
+{% endblock %}

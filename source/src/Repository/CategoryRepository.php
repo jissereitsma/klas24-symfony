@@ -29,6 +29,7 @@ class CategoryRepository extends ServiceEntityRepository
      * @return Category
      * @throws NotFoundHttpException
      */
+    /*
     public function find($id, $lockMode = null, $lockVersion = null): Category
     {
         $category = parent::find($id, $lockMode, $lockVersion);
@@ -37,5 +38,5 @@ class CategoryRepository extends ServiceEntityRepository
         }
 
         return $category;
-    }
+    }*/
 }

@@ -8,10 +8,7 @@
     <ul class="grid grid-cols-4 gap-4">
         {% for product in products %}
             <li>
-                <a href="/product/{{ product.id }}">
-                    <h3>{{ product.title }}</h3>
-                    <img src="{{ product.image }}" loading="lazy">
-                </a>
+            {% include 'product/card.html.twig' with {'product': product} %}
             </li>
         {% endfor %}
     </ul>

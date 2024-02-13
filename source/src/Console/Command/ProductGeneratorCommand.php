@@ -36,8 +36,14 @@ class ProductGeneratorCommand extends Command
 
         for ($i = 0; $i < $amount; $i++) {
             $progressBar->advance();
-            $this->productGenerator->generate();
+            $this->productGenerator->generate(false);
+
+            if ($i % 10 === 0) {
+                $this->productGenerator->flush();
+            }
         }
+
+        $this->productGenerator->flush();
 
         $progressBar->finish();
         $output->writeln('');
