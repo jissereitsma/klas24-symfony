@@ -25,7 +25,7 @@ class CategoryController extends AbstractController
     }
 
     #[Route(name: 'category', path: '/category/{id}', methods: ['GET', 'HEAD'])]
-    public function __invoke(?Category $category = null, Request $request): Response
+    public function __invoke(Request $request, ?Category $category = null, ): Response
     {
         if ($category=== null) {
             return $this->render('page/notfound.html.twig', $this->genericPageLoader->mergeParameters([
