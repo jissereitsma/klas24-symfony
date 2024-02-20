@@ -24,5 +24,18 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Product\Product:
-        factory: ['App\Product\ProductFactory', 'create']
+    App\Entity\Product:
+        factory: ['App\Entity\ProductFactory', 'create']
+
+
+    App\Generator\FoobarGenerator:
+        tags: ['custom.generator']
+
+    App\Generator\CompositeGenerator:
+        arguments:
+            $generators: !tagged_iterator custom.generator
+
+
+foo:
+    bar1:
+        bar2: 'Hello World'

@@ -2,6 +2,7 @@
 
 namespace App\Console\Command;
 
+use App\Generator\CompositeGenerator;
 use App\Generator\ProductGenerator;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -14,7 +15,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ProductGeneratorCommand extends Command
 {
     public function __construct(
-        private ProductGenerator $productGenerator,
+        private CompositeGenerator $productGenerator,
         string $name = null
     ) {
         parent::__construct($name);

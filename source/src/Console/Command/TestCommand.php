@@ -13,11 +13,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
-#[AsCommand(name: 'mytest')]
+#[AsCommand(name: 'test')]
 class TestCommand extends Command
 {
     public function __construct(
-        #[Autowire(service: 'kernel')] private $foobar,
+        #[Autowire(service: 'kernel')] private $kernel,
+        #[Autowire(param: 'foo.bar1.bar2')] private string $foo = '',
         string $name = null)
     {
         parent::__construct($name);
@@ -25,7 +26,8 @@ class TestCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln('Kernel '.$this->foobar->getCacheDir());
+        $output->writeln('Cache directory: '.$this->kernel->getCacheDir());
+        $output->writeln('Custom parameter: '.$this->foo);
         return Command::SUCCESS;
     }
 }
